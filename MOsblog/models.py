@@ -14,6 +14,6 @@ class Article(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True) 
-
+    is_published = models.BooleanField(default=True)
     def __str__(self):
         return self.title  
