@@ -6,21 +6,25 @@
 {% block content %}
 <h1>Latest news</h1>
 
-<div>
-  {% for story in Stories %}
+<div class="news-list">
+  {% for story in stories %}
+
+  <section class="news-items">
   {% if story.image %}
-  {{ story.title }}
+  <img src="{{ story.image.url }}" alt="{{ story.title }}">
+  
   
   {% endif %}
   
   <p>{{story.title}}</p>
   <p>{{story.content}}</p>
   
-  <p>{% comment %} {{story.pub_date | date: "d F, Y"}} | {{ story.category }} {% endcomment %}</p>
+  <p>{{story.pub_date|date:"d F, Y"}} | {{ story.category }}</p>
   
-  <a href="Read More"></a>
-  
-  
+  <a href="">Read More</a>
+  </section>
+  {% empty %}
+  <p>No news available at the moment.</p>
   
   {% endfor %}
   
