@@ -6,7 +6,8 @@ from .models import Article, Category
 def Homepage(request):
     stories = Article.objects.filter(is_published=True).order_by('-pub_date')
     categories = Category.objects.all()
-    return render(request, 'homepage.html', {'stories': stories, 'categories': categories})
+    Politics_news = Article.objects.filter(category__name= "Politics", is_published=True).order_by('-pub_date')[:5]
+    return render(request, 'homepage.html', {'stories': stories, 'categories': categories, 'Politics_news': Politics_news })
 
 
 def article_details(request):

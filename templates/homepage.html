@@ -4,7 +4,7 @@
 
 
 {% block content %}
-<h1>Latest news</h1>
+{% comment %} <h1>Latest news</h1>
 
 <div class="news-list">
   {% for story in stories %}
@@ -17,7 +17,7 @@
   {% endif %}
   
   <p>{{story.title}}</p>
-  <p>{{story.content}}</p>
+  <p>{{story.content|truncatewords:30}}</p>
   
   <p>{{story.pub_date|date:"d F, Y"}} | {{ story.category }}</p>
   
@@ -29,7 +29,31 @@
   {% endfor %}
   
   
-</div>
+</div> {% endcomment %}
 
+
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      {% for story in Politics_news%}
+      <section class="grid-items">
+        <p><small>
+          {{ story.pub_date|date:"d F, Y" }}
+        </small></p>
+          <h2>{{story.title}}</h2>
+        {% endfor %}  
+
+      </section>
+    </div>
+
+    <div class="col-6">
+
+    </div>
+
+    <div class="col-3">
+
+    </div>
+  </div>
+</div>
 
 {% endblock %}  
