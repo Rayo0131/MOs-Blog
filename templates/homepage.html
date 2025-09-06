@@ -32,7 +32,7 @@
 </div> {% endcomment %}
 
 
-<div class="container">
+{% comment %} <div class="container">
   <div class="row">
     <div class="col-3">
       {% for story in Politics_news%}
@@ -54,6 +54,180 @@
 
     </div>
   </div>
+</div> {% endcomment %}
+
+<main class="container">
+  <div class="row">
+  <aside class="col-3">
+   <h4>Latest News</h4>
+    {% for story in latest_news%}
+    <p><small class="text-danger">{{ story.pub_date|timesince }} ago</small></p>
+    <h4>{{story.title|truncatewords:9}}</h4>
+    <hr>
+    
+
+    {% endfor %}
+
+  </aside>
+  <section class="col-6">
+    {% for story in big_news %}
+    {% if story.image %}
+    <img class="w-100" src="{{ story.image.url }}" alt="{{ story.title }}">
+
+
+     {% endif %}
+      <h4 class="bg-secondary p-3">{{story.title}}</h4>
+    {% endfor %}
+     <div><img width='100%' src="{% static 'img/quatar-lg-banner.png' %}" alt="ads"></div>
+
+    </section>
+
+  <aside class="col-3">
+    {% for story in top_news%}
+      <div class="row">
+      <section class="col-9">
+        <h4>{{story.title|truncatewords:9}}</h4>
+        <p>{{ story.category }}</p>
+      </section>
+      <aside class="col-3">
+        {% if story.image %}
+      <img class="w-100" src="{{ story.image.url }}" alt="{{ story.title }}">
+     {% endif %}
+    </aside>
+    </div>
+    <hr>
+    {% endfor %}
+   
+  </aside>  
+    
+
+
+
 </div>
+</main>
+
+<main>
+  <div id="gridCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+
+    {% for story in carousel_slider %}
+      {% if forloop.counter0|divisibleby:4 %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <div class="row">
+      {% endif %}
+
+            <div class="col-md-3">
+              <div class="card h-100">
+                <img style="height:180px; object-fit:cover;  object-position: top" src="{{ story.image.url }}" class="card-img-top" alt="{{ story.title }}">
+                <div class="card-body">
+           <a href="{% url 'article' story.slug %}">      <h5 class="card-title">{{ story.title|truncatewords:5 }}</h5> </a> 
+                  <p class="card-text">{{ story.content|truncatewords:15 }}</p>
+                </div>
+              </div>
+            </div>
+
+      {% if forloop.counter|divisibleby:4 or forloop.last %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#gridCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#gridCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</main>
+
+<main class='container'>
+<section class="row">
+  <aside class="col-6">
+    <h2>Weddings</h2>
+<div id="sportsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for story in carousel_news %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            {% if story.image %}
+            <img style="height:300px; object-fit:cover;  object-position: top" src="{{ story.image.url }}" class="d-block w-100" alt="{{ story.title }}">
+            {% endif %}
+            <div class="carousel-caption bg-dark bg-opacity-50 p-3 rounded">
+                <h5>{{ story.title }}</h5>
+                                  <p class="card-text">{{ story.content|truncatewords:15 }}</p>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#sportsCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#sportsCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+<div class="d-flex">
+  {% for story in slider_news%}
+      <div class="row">
+      <section class="col-9">
+        <h4>{{story.title|truncatewords:9}}</h4>
+        <p>{{ story.category }}</p>
+      </section>
+      <aside class="col-3">
+        {% if story.image %}
+      <img class="w-100" src="{{ story.image.url }}" alt="{{ story.title }}">
+     {% endif %}
+    </aside>
+    </div>
+    <hr>
+    {% endfor %}
+</div>
+  </aside>
+
+<aside class="col-3">
+   {% for story in top_news%}
+      <div class="row">
+      <section class="col-9">
+        <h4>{{story.title|truncatewords:9}}</h4>
+        <p>{{ story.category }}</p>
+      </section>
+      <aside class="col-3">
+        {% if story.image %}
+      <img class="w-100" src="{{ story.image.url }}" alt="{{ story.title }}">
+     {% endif %}
+    </aside>
+    </div>
+    <hr>
+    {% endfor %}
+</aside>
+
+<aside class="col-3">
+<div><img width='100%' src="{% static 'img/ad2.jpeg' %}" alt="ads"></div>
+<div>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/JQh0YjCRXi0?si=VYQ4s-40db1BE_t0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+</aside>
+
+</section>
+
+</main>
+
+<div>
+    <img width='100%' src="{% static 'img/ad3.png' %}" alt="ads">
+
+</div>
+<footer>
+  <div>
+    
+  </div>
+  <div>
+    &copy; 2025 Copyright
+  </div>
+</footer>
 
 {% endblock %}  

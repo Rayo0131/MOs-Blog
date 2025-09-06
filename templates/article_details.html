@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{%  block content  %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+
+<h1>{{ article.title }}</h1>
+<p>{{ article.pub_date }}</p>
+
+{% if article.image %}
+<img src="{{ article.image.url }}" alt="{{ article.title }}">
+{% endif %}
+
+
+<p> By {{ article.author }}</p>
+<p>{{ article.content|linebreaks }}</p>
+
+
+</div>
+
+<div class="col-4" >
+
+    <div style="margin: 20%; margin-top: 48%;">
+        <img src="{% static "image/gif.gif" %}"  style="width: 180px;" alt="" >
+      </div>
+      
+      
+</div>
+
+</div>
+</div>
+{% endblock %}
