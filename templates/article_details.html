@@ -33,4 +33,11 @@
 
 </div>
 </div>
+
+<h3>Add a Comment</h3>
+<form method="post" action="{% url 'post_comment' article.slug %}" class="mb-4">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit Comment</button>
+</form>
 {% endblock %}
