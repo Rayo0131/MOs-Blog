@@ -62,7 +62,7 @@
    <h4>Latest News</h4>
     {% for story in latest_news%}
     <p><small class="text-danger">{{ story.pub_date|timesince }} ago</small></p>
-    <h4>{{story.title|truncatewords:9}}</h4>
+    <a href="{% url 'article' story.slug %}"><h4>{{story.title|truncatewords:9}}</h4></a> 
     <hr>
     
 
@@ -72,13 +72,13 @@
   <section class="col-6">
     {% for story in big_news %}
     {% if story.image %}
-    <img class="w-100" src="{{ story.image.url }}" alt="{{ story.title }}">
+    <a href="{% url 'article' story.slug %}"><img class="w-100" src="{{ story.image.url }}" alt="{{ story.title }}"></a> 
 
 
      {% endif %}
-      <h4 class="bg-secondary p-3">{{story.title}}</h4>
+      <a href="{% url 'article' story.slug %}"><h4 class="bg-secondary p-3">{{story.title}}</h4></a> 
     {% endfor %}
-     <div><img width='100%' src="{% static 'img/quatar-lg-banner.png' %}" alt="ads"></div>
+     <img width='100%' src="{% static 'img/quatar-lg-banner.png' %}" alt="ads">
 
     </section>
 
@@ -86,12 +86,12 @@
     {% for story in top_news%}
       <div class="row">
       <section class="col-9">
-        <h4>{{story.title|truncatewords:9}}</h4>
+        <a href="{% url 'article' story.slug %}"><h4>{{story.title|truncatewords:9}}</h4></a> 
         <p>{{ story.category }}</p>
       </section>
       <aside class="col-3">
         {% if story.image %}
-      <img class="w-100" src="{{ story.image.url }}" alt="{{ story.title }}">
+      <a href="{% url 'article' story.slug %}"><img class="w-100" src="{{ story.image.url }}" alt="{{ story.title }}"></a> 
      {% endif %}
     </aside>
     </div>
@@ -118,7 +118,7 @@
 
             <div class="col-md-3">
               <div class="card h-100">
-                <img style="height:180px; object-fit:cover;  object-position: top" src="{{ story.image.url }}" class="card-img-top" alt="{{ story.title }}">
+                <a href="{% url 'article' story.slug %}"><img style="height:180px; object-fit:cover;  object-position: top" src="{{ story.image.url }}" class="card-img-top" alt="{{ story.title }}"></a> 
                 <div class="card-body">
            <a href="{% url 'article' story.slug %}">      <h5 class="card-title">{{ story.title|truncatewords:5 }}</h5> </a> 
                   <p class="card-text">{{ story.content|truncatewords:15 }}</p>
@@ -154,10 +154,10 @@
         {% for story in carousel_news %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
             {% if story.image %}
-            <img style="height:300px; object-fit:cover;  object-position: top" src="{{ story.image.url }}" class="d-block w-100" alt="{{ story.title }}">
+            <a href="{% url 'article' story.slug %}"><img style="height:300px; object-fit:cover;  object-position: top" src="{{ story.image.url }}" class="d-block w-100" alt="{{ story.title }}"></a> 
             {% endif %}
             <div class="carousel-caption bg-dark bg-opacity-50 p-3 rounded">
-                <h5>{{ story.title }}</h5>
+                <a href="{% url 'article' story.slug %}"><h5>{{ story.title }}</h5></a> 
                                   <p class="card-text">{{ story.content|truncatewords:15 }}</p>
 
             </div>
@@ -175,12 +175,12 @@
   {% for story in slider_news%}
       <div class="row">
       <section class="col-9">
-        <h4>{{story.title|truncatewords:9}}</h4>
+        <a href="{% url 'article' story.slug %}"><h4>{{story.title|truncatewords:9}}</h4></a> 
         <p>{{ story.category }}</p>
       </section>
       <aside class="col-3">
         {% if story.image %}
-      <img class="w-100" src="{{ story.image.url }}" alt="{{ story.title }}">
+      <a href="{% url 'article' story.slug %}"><img class="w-100" src="{{ story.image.url }}" alt="{{ story.title }}"></a> 
      {% endif %}
     </aside>
     </div>
@@ -193,12 +193,12 @@
    {% for story in top_news%}
       <div class="row">
       <section class="col-9">
-        <h4>{{story.title|truncatewords:9}}</h4>
+        <a href="{% url 'article' story.slug %}"><h4>{{story.title|truncatewords:9}}</h4></a> 
         <p>{{ story.category }}</p>
       </section>
       <aside class="col-3">
         {% if story.image %}
-      <img class="w-100" src="{{ story.image.url }}" alt="{{ story.title }}">
+      <a href="{% url 'article' story.slug %}"><img class="w-100" src="{{ story.image.url }}" alt="{{ story.title }}"></a> 
      {% endif %}
     </aside>
     </div>
