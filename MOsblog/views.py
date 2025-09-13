@@ -25,6 +25,11 @@ def Homepage(request):
 
 def article_details(request, slug):
     article = get_object_or_404(Article, slug=slug, is_published=True)
+    related_stories = (
+        Article.objects.filter(category=article.category)
+        .exclude(slug=slug)
+        .order_by('-pub_date')[:5]
+    )
     categories = Category.objects.all()
     comments = article.comments.order_by('-pub_date')
     comment_form = CommentForm()
@@ -32,7 +37,8 @@ def article_details(request, slug):
         'article': article,
         'categories': categories,
         'comments': comments,
-        'comment_form': comment_form
+        'comment_form': comment_form,
+        'related_stories': related_stories
     })
 
 def category(request, slug):
@@ -53,6 +59,7 @@ def post_comment(request, slug):
             comment = form.save(commit=False)
             comment.article = article
             comment.author = request.user if request.user.is_authenticated else None
+            comment.is_approved = True
             comment.save()
-            return redirect('article_details', slug=article.slug)
-    return redirect('article_details', slug=article.slug)
+            return redirect('article', slug=article.slug)
+    return redirect('article', slug=article.slug)

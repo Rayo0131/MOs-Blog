@@ -12,13 +12,51 @@
 <p>{{ article.pub_date }}</p>
 
 {% if article.image %}
-<img src="{{ article.image.url }}" alt="{{ article.title }}">
+<img src="{{ article.image.url }}" alt="{{ article.title }}" style="width:100%" 'height:80%';>
 {% endif %}
 
 
 <p> By {{ article.author }}</p>
 <p>{{ article.content|linebreaks }}</p>
+<hr>
 
+<h3>Comments</h3>
+
+<div>
+    {% if comments %}
+    {% for comment in comments %}
+    
+    <section>
+        <p><strong>{{ comment.author.username|default:"Guest" }}</strong> said:<br>
+        <p>{{ comment.content }}<br>
+        <small class="text-danger"><em>{{ comment.pub_date|timesince }} ago</em></small>
+
+        {% if not comment.is_approved %}
+        <p><em>(Awaiting moderation)</em></p>
+        
+        {% endif %}
+
+
+
+    </section>
+    
+    {% endfor %}
+    
+    {% else %}
+    <p>No comment yet. Be the first to comment!
+
+
+
+
+    {% endif %}
+</div>
+<hr>
+<h3>Add a Comment</h3>
+<form method="post" action="{% url 'post_comment' article.slug %}" class="mb-4">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit Comment</button>
+</form>
 
 </div>
 
@@ -26,18 +64,26 @@
 
     <div style="margin: 20%; margin-top: 48%;">
         <img src="{% static "image/gif.gif" %}"  style="width: 180px;" alt="" >
-      </div>
-      
+    </div>
+    <div id="calendar"></div>
+    <div>
+      {% for story in related_stories %}
+      <section class="grid-items">
+        <p><small>
+          {{ story.pub_date|timesince }}ago
+          
+
+        </small></p>
+    <a href="{% url 'article' story.slug %}"><h4>{{story.title|truncatewords:"9"}}</h4></a>
+    <hr>
+  </section>
+    {% endfor %}
+    </div>
       
 </div>
 
 </div>
 </div>
 
-<h3>Add a Comment</h3>
-<form method="post" action="{% url 'post_comment' article.slug %}" class="mb-4">
-    {% csrf_token %}
-    {{ comment_form.as_p }}
-    <button type="submit" class="btn btn-primary">Submit Comment</button>
-</form>
+
 {% endblock %}
