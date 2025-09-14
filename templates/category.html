@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+
+{% for article in articles %}
+    <article>
+         {% if article.image %}
+    <a href="{% url 'article' article.slug %}"><img class="w-100" src="{{ article.image.url }}" alt="{{ article.title }}"></a>
+     {% endif %}
+      <h3>
+        <a href="{% url 'article' article.slug %}">
+          {{ article.title }}
+        </a>
+      </h3>
+      <p>{{ article.excerpt|truncatewords:25 }}</p>
+      <small>Published: {{ article.pub_date }}</small>
+    </article>
+    <hr>
+  {% empty %}
+    <p>No articles in this category yet.</p>
+  {% endfor %}
+</div>
+
+
+<div class="col-4" >
+
+    <div>
+        <img src="{% static "img/ad2.jpeg" %}"  style="width: 100%;" alt="" >
+    </div>
+    <div id="calendar"></div>
+    <div>
+      {% for story in related_stories %}
+      <section class="grid-items">
+        <p><small>
+          {{ story.pub_date|timesince }}ago
+          
+
+        </small></p>
+    <a href="{% url 'article' story.slug %}"><h4>{{story.title|truncatewords:"9"}}</h4></a>
+    <hr>
+  </section>
+    {% endfor %}
+    </div>
+
+
+
+</div>
+
+</div>
+</div>
+
+
+
+
+
+{% endblock %}

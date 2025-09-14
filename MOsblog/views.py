@@ -63,3 +63,19 @@ def post_comment(request, slug):
             comment.save()
             return redirect('article', slug=article.slug)
     return redirect('article', slug=article.slug)
+
+def About(request):
+    return render(request, 'about.html')
+
+def Categories(request):
+    categories = Category.objects.all()
+    return render(request, 'categories.html', {'categories': categories})
+
+def Contact(request):
+    return render(request, 'contact.html')
+
+def Privacy(request):
+    return render(request, 'privacy.html')
+
+def Terms(request):
+    return render(request, 'terms.html')
